@@ -22,7 +22,7 @@ yarn start
 
 The `yarn start` command launched `webpack-dev-server` and opens the app in your browser. See generated `readme.md` for further details...
 
-The app is utilizing [Tachyons CSS](https://github.com/tachyons-css/tachyons/) for component skinning.
+The app is utilizing [Tachyons CSS](https://github.com/tachyons-css/tachyons/) for component skinning, but this is optional.
 
 ## Configuration
 
