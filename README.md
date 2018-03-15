@@ -8,6 +8,8 @@ New project generator for TypeScript apps buit around these libraries from the [
 
 The skeleton app contains various app configuration options, dummy components to illustrate the overall usage patterns, and detailed comments with further documentation links to help you get started.
 
+[Live demo](http://demo.thi.ng/umbrella/create-hdom-app) (default configuration)
+
 ## Usage
 
 ```
@@ -20,7 +22,7 @@ yarn start
 
 The `yarn start` command launched `webpack-dev-server` and opens the app in your browser. See generated `readme.md` for further details...
 
-The app is utilizing [Tachyons CSS] for component skinning.
+The app is utilizing [Tachyons CSS](https://github.com/tachyons-css/tachyons/) for component skinning.
 
 ## Configuration
 
