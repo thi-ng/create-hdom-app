@@ -5,18 +5,15 @@ import { isArray } from "@thi.ng/checks/is-array";
 import { start } from "@thi.ng/hdom";
 
 import { AppConfig, ViewSpec, AppViews } from "./api";
-import { home } from "./components/home";
 
 /**
  * Generic base app skeleton. You can use this as basis for your own apps.
  *
  * As is the app does not much more than:
  *
- * - initializing state, event bus, router (if not disabled)
+ * - initialize state and event bus
  * - attach derived views
- * - add ROUTE_TO event & effect handlers
- * - define root component wrapper to look up real component based on
- *   current route
+ * - define root component wrapper
  * - start hdom render & event bus loop
  */
 export class App {
@@ -34,6 +31,12 @@ export class App {
         this.bus = new EventBus(this.state, config.events, config.effects);
     }
 
+    /**
+     * Initializes given derived view specs and attaches them to app
+     * state atom.
+     *
+     * @param specs
+     */
     addViews(specs: IObjectOf<ViewSpec>) {
         for (let id in specs) {
             const spec = specs[id];
@@ -46,27 +49,22 @@ export class App {
     }
 
     /**
-     * Starts router and kicks off hdom render loop, including batched
-     * event processing and fast fail check if DOM updates are necessary
-     * (assumes ALL state is held in the app state atom. So if there
-     * weren't any events causing a state change since last frame,
-     * re-rendering is skipped without even attempting to diff DOM tree).
+     * Kicks off hdom render loop, including batched event processing
+     * and fast fail check if DOM updates are necessary (assumes ALL
+     * state is held in the app state atom. So if there weren't any
+     * events causing a state change since last frame, re-rendering is
+     * skipped without even attempting to diff DOM tree).
      */
     start() {
         let firstFrame = true;
-        start(this.config.domRoot, () => {
-            if (this.bus.processQueue() || firstFrame) {
-                firstFrame = false;
-                return this.rootComponent();
+        start(
+            this.config.domRoot,
+            () => {
+                if (this.bus.processQueue() || firstFrame) {
+                    firstFrame = false;
+                    return this.config.rootComponent(this, this.config.ui);
+                }
             }
-        });
-    }
-
-    /**
-     * User provided root component function defined
-     * by current route and the derived view defined above.
-     */
-    rootComponent(): any {
-        return home(this, this.config.ui);
+        );
     }
 }

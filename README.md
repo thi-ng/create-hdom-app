@@ -12,7 +12,7 @@ The skeleton app contains various app configuration options, dummy components to
 
 ## Status
 
-ALPHA - work in progress & current setup likely to change... 
+ALPHA - work in progress & current setup likely to change...
 
 ## Usage
 

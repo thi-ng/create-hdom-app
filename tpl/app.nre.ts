@@ -4,20 +4,17 @@ import { isArray } from "@thi.ng/checks/is-array";
 import { start } from "@thi.ng/hdom";
 
 import { AppConfig, ViewSpec, AppViews } from "./api";
-import { home } from "./components/home";
 
 /**
  * Generic base app skeleton. You can use this as basis for your own
- * apps, see `index.ts` for concrete extension.
+ * apps.
  *
  * As is the app does not much more than:
  *
- * - initializing state, event bus, router (if not disabled)
+ * - initialize state
  * - attach derived views
- * - add ROUTE_TO event & effect handlers
- * - define root component wrapper to look up real component based on
- *   current route
- * - start hdom render & event bus loop
+ * - define root component wrapper
+ * - start hdom render loop
  */
 export class App {
 
@@ -32,6 +29,12 @@ export class App {
         this.addViews(this.config.views);
     }
 
+    /**
+     * Initializes given derived view specs and attaches them to app
+     * state atom.
+     *
+     * @param specs
+     */
     addViews(specs: IObjectOf<ViewSpec>) {
         for (let id in specs) {
             const spec = specs[id];
@@ -44,20 +47,12 @@ export class App {
     }
 
     /**
-     * Starts router and kicks off hdom render loop, including batched
-     * event processing and fast fail check if DOM updates are necessary
-     * (assumes ALL state is held in the app state atom. So if there
-     * weren't any events causing a state change since last frame,
-     * re-rendering is skipped without even attempting to diff DOM tree).
+     * Kicks off hdom render loop.
      */
     start() {
-        start(this.config.domRoot, () => this.rootComponent());
-    }
-
-    /**
-     * User provided root component function defined.
-     */
-    rootComponent(): any {
-        return home(this, this.config.ui);
+        start(
+            this.config.domRoot,
+            () => this.config.rootComponent(this, this.config.ui)
+        );
     }
 }

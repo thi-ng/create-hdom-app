@@ -9,16 +9,16 @@ import { AppConfig, ViewSpec, AppViews } from "./api";
 
 /**
  * Generic base app skeleton. You can use this as basis for your own
- * apps, see `index.ts` for concrete extension.
+ * apps.
  *
  * As is the app does not much more than:
  *
- * - initializing state, event bus, router (if not disabled)
+ * - initialize state and router
  * - attach derived views
- * - add ROUTE_TO event & effect handlers
- * - define root component wrapper to look up real component based on
- *   current route
- * - start hdom render & event bus loop
+ * - add EVENT_ROUTE_CHANGED handler to store route info in app state
+ * - define root component to look up real component based on current
+ *   route
+ * - start router and hdom render loop
  */
 export class App {
 
@@ -48,6 +48,12 @@ export class App {
         });
     }
 
+    /**
+     * Initializes given derived view specs and attaches them to app
+     * state atom.
+     *
+     * @param specs
+     */
     addViews(specs: IObjectOf<ViewSpec>) {
         for (let id in specs) {
             const spec = specs[id];
@@ -60,11 +66,7 @@ export class App {
     }
 
     /**
-     * Starts router and kicks off hdom render loop, including batched
-     * event processing and fast fail check if DOM updates are necessary
-     * (assumes ALL state is held in the app state atom. So if there
-     * weren't any events causing a state change since last frame,
-     * re-rendering is skipped without even attempting to diff DOM tree).
+     * Starts router and kicks off hdom render loop.
      */
     start() {
         this.router.start();

@@ -2,6 +2,8 @@ import { FX_DISPATCH_NOW } from "@thi.ng/atom/api";
 import { trace, valueUpdater } from "@thi.ng/atom/interceptors";
 import { AppConfig } from "./api";
 
+import { home } from "./components/home";
+
 // best practice tip: define event & effect names as consts or enums
 // and avoid hardcoded strings for more safety and easier refactoring
 // also see pre-defined event handlers & interceptors in @thi.ng/atom:
@@ -50,6 +52,9 @@ export const CONFIG: AppConfig = {
     // DOM root element (or ID)
     domRoot: "app",
 
+    // root component function used by the app
+    rootComponent: home,
+
     // initial app state
     initialState: {
         counter: 0,
@@ -67,12 +72,12 @@ export const CONFIG: AppConfig = {
     // component CSS class config using tachyons-css
     // these attribs are being passed to all/most components
     ui: {
-        root: { class: "ma0 w-100 pa0 sans-serif" },
-        header: { class: "h5 pa4 tc bg-dark-gray white" },
         body: { class: "ma3" },
-        title: { class: "f1 fw4" },
-        logo: { class: "br-100 w3 h3", src: "assets/logo.png" },
+        code: { class: "pa3 code bg-washed-yellow" },
+        header: { class: "h5 pa4 tc bg-dark-gray white" },
         link: { class: "pointer link blue" },
-        code: { class: "pa3 code bg-washed-yellow" }
+        logo: { class: "br-100 w3 h3", src: "assets/logo.png" },
+        root: { class: "ma0 w-100 pa0 sans-serif" },
+        title: { class: "f1 fw4" },
     }
 };

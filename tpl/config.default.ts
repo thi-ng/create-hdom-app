@@ -122,12 +122,12 @@ export const CONFIG: AppConfig = {
     // component CSS class config using tachyons-css
     // these attribs are being passed to all/most components
     ui: {
-        root: { class: "ma0 w-100 pa0 sans-serif" },
-        header: { class: "h5 pa4 tc bg-dark-gray white" },
         body: { class: "ma3" },
-        title: { class: "f1 fw4" },
-        logo: { class: "br-100 w3 h3", src: "assets/logo.png" },
+        code: { class: "pa3 code bg-washed-yellow" },
+        header: { class: "h5 pa4 tc bg-dark-gray white" },
         link: { class: "pointer link blue" },
-        code: { class: "pa3 code bg-washed-yellow" }
+        logo: { class: "br-100 w3 h3", src: "assets/logo.png" },
+        root: { class: "ma0 w-100 pa0 sans-serif" },
+        title: { class: "f1 fw4" },
     }
 };

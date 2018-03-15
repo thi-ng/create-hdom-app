@@ -1,11 +1,13 @@
+import { UIAttribs } from "../api";
 import { App } from "../app";
 import { EV_ALERT, EV_COUNT } from "../config";
+
 import { appState } from "./appstate";
 import { header } from "./header";
 import { eventLink } from "./event-link";
 import { routeLink } from "./route-link";
 
-export function home(app: App, ui: any) {
+export function home(app: App, ui: UIAttribs) {
     return ["div", ui.root,
         [header, ui, "Welcome to @thi.ng/hdom"],
         ["div", ui.body,
