@@ -1,0 +1,26 @@
+{
+    "name": "create-hdom-app",
+    "version": "0.0.1",
+    "description": "New project generator for @thi.ng/hdom TypeScript apps",
+    "main": "index.js",
+    "repository": "https://github.com/thi-ng/create-hdom-app",
+    "author": "Karsten Schmidt",
+    "license": "Apache-2.0",
+    "bin": {
+        "create-hdom-app": "./index.js"
+    },
+    "dependencies": {
+        "chalk": "^2.3.2",
+        "commander": "^2.15.0",
+        "fs-extra": "^5.0.0",
+        "validate-npm-package-name": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^9.4.7",
+        "typescript": "^2.7.2"
+    },
+    "files": [
+        "index.js",
+        "tpl"
+    ]
+}
