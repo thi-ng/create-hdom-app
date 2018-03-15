@@ -10,6 +10,10 @@ The skeleton app contains various app configuration options, dummy components to
 
 [Live demo](http://demo.thi.ng/umbrella/create-hdom-app) (default configuration)
 
+## Status
+
+ALPHA - work in progress & current setup likely to change... 
+
 ## Usage
 
 ```
