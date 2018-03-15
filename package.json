@@ -1,6 +1,6 @@
 {
     "name": "create-hdom-app",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "New project generator for @thi.ng/hdom TypeScript apps",
     "main": "index.js",
     "repository": "https://github.com/thi-ng/create-hdom-app",
@@ -21,6 +21,7 @@
     },
     "files": [
         "index.js",
+        "generate.js",
         "tpl"
     ]
 }
