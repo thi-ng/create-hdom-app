@@ -1,6 +1,6 @@
 import { Route } from "@thi.ng/router/api";
 import { FX_DISPATCH_NOW } from "@thi.ng/atom/api";
-import { trace, valueUpdater } from "@thi.ng/atom/interceptors";
+import { forwardSideFx, trace, valueUpdater } from "@thi.ng/atom/interceptors";
 import { AppConfig } from "./api";
 
 // user defined components for different routes
@@ -80,7 +80,7 @@ export const CONFIG: AppConfig = {
     // Docs here:
     // https://github.com/thi-ng/umbrella/blob/master/packages/atom/src/event-bus.ts#L14
     events: {
-        [EV_ALERT]: (_, [__, msg]) => ({ [FX_ALERT]: msg }),
+        [EV_ALERT]: forwardSideFx(FX_ALERT),
 
         [EV_COUNT]: [
             trace,

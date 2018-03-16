@@ -59,8 +59,8 @@ const FILES: FileSpecs = {
 
 const makePackage = (conf: ProjectConfig, opts) => {
     const deps = {
-        "@thi.ng/atom": "^0.12.1",
-        "@thi.ng/hdom": "^2.2.0",
+        "@thi.ng/atom": "^0.13.0",
+        "@thi.ng/hdom": "^2.2.1",
     };
     if (opts.router) {
         deps["@thi.ng/router"] = "^0.1.0";
