@@ -1,8 +1,8 @@
 import { IObjectOf } from "@thi.ng/api/api";
 import { Atom } from "@thi.ng/atom/atom";
-import { EventBus } from "@thi.ng/atom/event-bus";
 import { isArray } from "@thi.ng/checks/is-array";
 import { start } from "@thi.ng/hdom";
+import { EventBus } from "@thi.ng/interceptors/event-bus";
 
 import { AppConfig, ViewSpec, AppViews } from "./api";
 

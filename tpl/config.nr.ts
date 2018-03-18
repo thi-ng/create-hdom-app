@@ -1,7 +1,7 @@
-import { FX_DISPATCH_NOW } from "@thi.ng/atom/api";
-import { forwardSideFx, trace, valueUpdater } from "@thi.ng/atom/interceptors";
-import { AppConfig } from "./api";
+import { FX_DISPATCH_NOW } from "@thi.ng/interceptors/api";
+import { forwardSideFx, trace, valueUpdater } from "@thi.ng/interceptors/interceptors";
 
+import { AppConfig } from "./api";
 import { home } from "./components/home";
 
 // best practice tip: define event & effect names as consts or enums

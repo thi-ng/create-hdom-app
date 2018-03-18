@@ -1,4 +1,5 @@
 import { Route } from "@thi.ng/router/api";
+
 import { AppConfig } from "./api";
 
 // user defined components for different routes

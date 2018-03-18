@@ -4,6 +4,7 @@ New project generator for TypeScript apps buit around these libraries from the [
 
 - [@thi.ng/atom](https://github.com/thi-ng/umbrella/tree/master/packages/atom)
 - [@thi.ng/hdom](https://github.com/thi-ng/umbrella/tree/master/packages/hdom)
+- [@thi.ng/interceptors](https://github.com/thi-ng/umbrella/tree/master/packages/interceptors)
 - [@thi.ng/router](https://github.com/thi-ng/umbrella/tree/master/packages/router) (optional)
 
 The skeleton app contains various app configuration options, dummy components to illustrate the overall usage patterns, and detailed comments with further documentation links to help you get started.
