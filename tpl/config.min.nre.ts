@@ -1,6 +1,5 @@
 import { AppConfig } from "./api";
-
-import { home } from "./components/home";
+import { main } from "./components/main";
 
 // main App configuration
 export const CONFIG: AppConfig = {
@@ -9,11 +8,11 @@ export const CONFIG: AppConfig = {
     domRoot: "app",
 
     // root component function used by the app
-    rootComponent: home,
+    rootComponent: main,
 
     // initial app state
     initialState: {
-        counter: 0,
+
     },
 
     // derived view declarations
@@ -29,11 +28,7 @@ export const CONFIG: AppConfig = {
     // these attribs are being passed to all/most components
     ui: {
         body: { class: "ma3" },
-        code: { class: "pa3 code bg-washed-yellow" },
-        header: { class: "h5 pa4 tc bg-dark-gray white" },
-        link: { class: "pointer link blue" },
-        logo: { class: "br-100 w3 h3", src: "assets/logo.png" },
         root: { class: "ma0 w-100 pa0 sans-serif" },
-        title: { class: "f1 fw4" },
+        link: { class: "pointer link blue" },
     }
 };

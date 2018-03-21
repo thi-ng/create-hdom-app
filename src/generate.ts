@@ -1,3 +1,4 @@
+import { IObjectOf } from "@thi.ng/api/api";
 import chalk from "chalk";
 import { Command } from "commander";
 import * as fs from "fs-extra";
@@ -12,49 +13,85 @@ interface ProjectConfig {
 }
 
 type FileSpec = [string, string[]];
-type FileSpecs = { [id: string]: FileSpec[] };
+type FileSpecs = IObjectOf<IObjectOf<FileSpec[]>>;
 
 const FILES: FileSpecs = {
-    common: [
-        ["logo.png", ["public", "assets", "logo.png"]],
-        ["tsconfig.json", ["tsconfig.json"]],
-        ["webpack.config.js", ["webpack.config.js"]],
-        ["index.ts", ["src", "index.ts"]],
-        ["appstate.ts", ["src", "components", "appstate.ts"]],
-        ["header.ts", ["src", "components", "header.ts"]],
-    ],
-    default: [
-        ["api.default.ts", ["src", "api.ts"]],
-        ["app.default.ts", ["src", "app.ts"]],
-        ["config.default.ts", ["src", "config.ts"]],
-        ["home.default.ts", ["src", "components", "home.ts"]],
-        ["testroute.ts", ["src", "components", "testroute.ts"]],
-        ["event-link.ts", ["src", "components", "event-link.ts"]],
-        ["route-link.ts", ["src", "components", "route-link.ts"]],
-    ],
-    ne: [
-        ["api.ne.ts", ["src", "api.ts"]],
-        ["app.ne.ts", ["src", "app.ts"]],
-        ["config.ne.ts", ["src", "config.ts"]],
-        ["home.ne.ts", ["src", "components", "home.ts"]],
-        ["testroute.ts", ["src", "components", "testroute.ts"]],
-        ["route-link.ne.ts", ["src", "components", "route-link.ts"]],
-        ["link.ts", ["src", "components", "link.ts"]],
-    ],
-    nr: [
-        ["api.nr.ts", ["src", "api.ts"]],
-        ["app.nr.ts", ["src", "app.ts"]],
-        ["config.nr.ts", ["src", "config.ts"]],
-        ["home.nr.ts", ["src", "components", "home.ts"]],
-        ["event-link.ts", ["src", "components", "event-link.ts"]],
-    ],
-    nre: [
-        ["api.nre.ts", ["src", "api.ts"]],
-        ["app.nre.ts", ["src", "app.ts"]],
-        ["config.nre.ts", ["src", "config.ts"]],
-        ["home.nre.ts", ["src", "components", "home.ts"]],
-        ["link.ts", ["src", "components", "link.ts"]],
-    ],
+    default: {
+        common: [
+            ["logo.png", ["public", "assets", "logo.png"]],
+            ["tsconfig.json", ["tsconfig.json"]],
+            ["webpack.config.js", ["webpack.config.js"]],
+            ["index.ts", ["src", "index.ts"]],
+            ["appstate.ts", ["src", "components", "appstate.ts"]],
+            ["header.ts", ["src", "components", "header.ts"]],
+        ],
+        default: [
+            ["api.default.ts", ["src", "api.ts"]],
+            ["app.default.ts", ["src", "app.ts"]],
+            ["config.default.ts", ["src", "config.ts"]],
+            ["home.default.ts", ["src", "components", "home.ts"]],
+            ["testroute.ts", ["src", "components", "testroute.ts"]],
+            ["event-link.ts", ["src", "components", "event-link.ts"]],
+            ["route-link.ts", ["src", "components", "route-link.ts"]],
+        ],
+        ne: [
+            ["api.ne.ts", ["src", "api.ts"]],
+            ["app.ne.ts", ["src", "app.ts"]],
+            ["config.ne.ts", ["src", "config.ts"]],
+            ["home.ne.ts", ["src", "components", "home.ts"]],
+            ["testroute.ts", ["src", "components", "testroute.ts"]],
+            ["route-link.ne.ts", ["src", "components", "route-link.ts"]],
+            ["link.ts", ["src", "components", "link.ts"]],
+        ],
+        nr: [
+            ["api.nr.ts", ["src", "api.ts"]],
+            ["app.nr.ts", ["src", "app.ts"]],
+            ["config.nr.ts", ["src", "config.ts"]],
+            ["home.nr.ts", ["src", "components", "home.ts"]],
+            ["event-link.ts", ["src", "components", "event-link.ts"]],
+        ],
+        nre: [
+            ["api.nre.ts", ["src", "api.ts"]],
+            ["app.nre.ts", ["src", "app.ts"]],
+            ["config.nre.ts", ["src", "config.ts"]],
+            ["home.nre.ts", ["src", "components", "home.ts"]],
+            ["link.ts", ["src", "components", "link.ts"]],
+        ],
+    },
+    minimal: {
+        common: [
+            ["tsconfig.json", ["tsconfig.json"]],
+            ["webpack.config.js", ["webpack.config.js"]],
+            ["index.ts", ["src", "index.ts"]],
+            ["main.min.ts", ["src", "components", "main.ts"]],
+        ],
+        default: [
+            ["api.min.default.ts", ["src", "api.ts"]],
+            ["app.default.ts", ["src", "app.ts"]],
+            ["config.min.default.ts", ["src", "config.ts"]],
+            ["event-link.ts", ["src", "components", "event-link.ts"]],
+            ["route-link.ts", ["src", "components", "route-link.ts"]],
+        ],
+        ne: [
+            ["api.min.ne.ts", ["src", "api.ts"]],
+            ["app.ne.ts", ["src", "app.ts"]],
+            ["config.min.ne.ts", ["src", "config.ts"]],
+            ["route-link.ne.ts", ["src", "components", "route-link.ts"]],
+            ["link.ts", ["src", "components", "link.ts"]],
+        ],
+        nr: [
+            ["api.min.nr.ts", ["src", "api.ts"]],
+            ["app.nr.ts", ["src", "app.ts"]],
+            ["config.min.nr.ts", ["src", "config.ts"]],
+            ["event-link.ts", ["src", "components", "event-link.ts"]],
+        ],
+        nre: [
+            ["api.min.nre.ts", ["src", "api.ts"]],
+            ["app.nre.ts", ["src", "app.ts"]],
+            ["config.min.nre.ts", ["src", "config.ts"]],
+            ["link.ts", ["src", "components", "link.ts"]],
+        ],
+    }
 };
 
 const makePackage = (conf: ProjectConfig, opts) => {
@@ -73,7 +110,7 @@ const makePackage = (conf: ProjectConfig, opts) => {
             name: conf.name,
             version: "0.0.1",
             description: "TODO",
-            repository: "https://github.com/",
+            repository: `https://github.com/[your-gh-username]/${conf.name}`,
             author: "TODO",
             license: "MIT",
             scripts: {
@@ -119,7 +156,7 @@ TODO
 ### Development
 
 \`\`\`
-git clone https://github/com/...
+git clone https://github.com/[your-gh-username]/${conf.name}
 yarn install
 yarn start
 \`\`\`
@@ -151,6 +188,12 @@ const createApp = (conf: ProjectConfig, opts) => {
 
     log(opts, `Creating a new app "${conf.name}" in ${chalk.green(conf.root)}...\n`);
 
+    if (opts.bare) {
+        opts.router = false;
+        opts.events = false;
+        opts.minimal = true;
+    }
+
     conf.configID = opts.router ?
         opts.events ? "default" : "ne" :
         opts.events ? "nr" : "nre";
@@ -159,8 +202,9 @@ const createApp = (conf: ProjectConfig, opts) => {
     emitFile(["README.md"], makeReadme(conf), conf, opts);
     emitFile(["public", "index.html"], makeHtml(conf), conf, opts);
 
-    copyFileSet(FILES.common, conf, opts);
-    copyFileSet(FILES[conf.configID], conf, opts);
+    const filesets = opts.minimal ? FILES.minimal : FILES.default;
+    copyFileSet(filesets.common, conf, opts);
+    copyFileSet(filesets[conf.configID], conf, opts);
 }
 
 const emitFile = (srcpath: string[], body: string, conf: ProjectConfig, opts) => {
@@ -243,12 +287,14 @@ const packageJson = require("./package.json");
 const conf = <ProjectConfig>{};
 const opts: Command = new Command(packageJson.name)
     .version(packageJson.version)
-    .arguments('<project-directory>')
-    .usage(`${chalk.green('<project-directory>')} [options]`)
+    .arguments("<project-directory>")
+    .usage(`${chalk.green("<project-directory>")} [options]`)
     .action((name) => (conf.name = name))
-    .option('-q, --quiet', 'suppress all messages')
-    .option('--no-router', 'skip router config')
-    .option('--no-events', 'skip event config')
+    .option("-q, --quiet", "suppress all messages (excl. errors)")
+    .option("--bare", "same as '--minimal --no-router --no-events'")
+    .option("--minimal", "don't generate dummy components")
+    .option("--no-router", "skip router config")
+    .option("--no-events", "skip event config")
     .parse(process.argv);
 
 createApp(conf, opts);

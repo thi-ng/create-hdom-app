@@ -40,8 +40,8 @@ export interface AppViews extends IObjectOf<IView<any>> {
 }
 
 /**
- * Helper interface to pre-declare all possible keys for UI attributes
- * and so enable autocomplete & type safety.
+ * Helper interface to pre-declare keys of shared UI attributes for
+ * components and so enable autocomplete & type safety.
  *
  * See `AppConfig` above and its use in `src/config.ts` and various
  * component functions.

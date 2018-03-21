@@ -1,7 +1,5 @@
 import { IObjectOf } from "@thi.ng/api/api";
 import { ViewTransform, IView } from "@thi.ng/atom/api";
-import { EventDef, EffectDef } from "@thi.ng/interceptors/api";
-import { HTMLRouterConfig, RouteMatch } from "@thi.ng/router/api";
 
 import { App } from "./app";
 
@@ -9,7 +7,6 @@ import { App } from "./app";
 
 /**
  * Function signature for main app components.
- * I.e. components representing different app states linked to router.
  */
 export type AppComponent = (app: App, ui: UIAttribs) => any;
 
@@ -19,16 +16,12 @@ export type AppComponent = (app: App, ui: UIAttribs) => any;
 export type ViewSpec = string | [string, ViewTransform<any>];
 
 /**
- * Structure of the overall application config object.
- * See `src/config.ts`.
+ * Structure of the overall application config object
  */
 export interface AppConfig {
-    components: IObjectOf<AppComponent>;
     domRoot: string | Element;
-    effects: IObjectOf<EffectDef>;
-    events: IObjectOf<EventDef>;
     initialState: any;
-    router: HTMLRouterConfig;
+    rootComponent: AppComponent;
     ui: UIAttribs;
     views: IObjectOf<ViewSpec>;
 }
@@ -38,8 +31,6 @@ export interface AppConfig {
  * Add more declarations here as needed.
  */
 export interface AppViews extends IObjectOf<IView<any>> {
-    route: IView<RouteMatch>;
-    routeComponent: IView<any>;
 }
 
 /**
@@ -51,10 +42,6 @@ export interface AppViews extends IObjectOf<IView<any>> {
  */
 export interface UIAttribs {
     body: any;
-    code: any;
-    header: any;
     link: any;
-    logo: any;
     root: any;
-    title: any;
 }

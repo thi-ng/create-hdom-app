@@ -51,10 +51,6 @@ export interface AppViews extends IObjectOf<IView<any>> {
  */
 export interface UIAttribs {
     body: any;
-    code: any;
-    header: any;
     link: any;
-    logo: any;
     root: any;
-    title: any;
 }

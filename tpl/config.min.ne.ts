@@ -4,31 +4,14 @@ import { AppConfig } from "./api";
 
 // user defined components for different routes
 
-import { home } from "./components/home";
-import { testRoute } from "./components/testroute";
+import { main } from "./components/main";
 
 // route definitions
 // docs: https://github.com/thi-ng/umbrella/blob/master/packages/router/README.md
 
-export const ROUTE_HOME: Route = {
-    id: "home",
-    match: ["home"],
-};
-
-// example of a parametric route w/ parameter coercion & validation.
-// if coercion or validation fails, the route will not be matched if
-// no other route matches, the configured default fallback route will
-// be used. see full router config further below
-
-export const ROUTE_TEST: Route = {
-    id: "test",
-    match: ["test", "?id"],
-    validate: {
-        id: {
-            coerce: (x) => parseInt(x),
-            check: (x) => x > 0 && x < 3
-        }
-    }
+export const ROUTE_MAIN: Route = {
+    id: "main",
+    match: ["main"],
 };
 
 // main App configuration
@@ -42,12 +25,11 @@ export const CONFIG: AppConfig = {
         // (if set to false, a web server is needed)
         useFragment: true,
         // route ID if no other matches (MUST be non-parametric!)
-        defaultRouteID: ROUTE_HOME.id,
+        defaultRouteID: ROUTE_MAIN.id,
         // IMPORTANT: rules with common prefixes MUST be specified in
         // descending order of highest precision / longest path
         routes: [
-            ROUTE_HOME,
-            ROUTE_TEST,
+            ROUTE_MAIN,
         ]
     },
 
@@ -55,8 +37,7 @@ export const CONFIG: AppConfig = {
     // those functions are called automatically by the app's root component
     // based on the currently active route
     components: {
-        [ROUTE_HOME.id]: home,
-        [ROUTE_TEST.id]: testRoute,
+        [ROUTE_MAIN.id]: main,
     },
 
     // DOM root element (or ID)
@@ -64,7 +45,7 @@ export const CONFIG: AppConfig = {
 
     // initial app state
     initialState: {
-        counter: 0,
+
     },
 
     // derived view declarations
@@ -80,11 +61,7 @@ export const CONFIG: AppConfig = {
     // these attribs are being passed to all/most components
     ui: {
         body: { class: "ma3" },
-        code: { class: "pa3 code bg-washed-yellow" },
-        header: { class: "h5 pa4 tc bg-dark-gray white" },
-        link: { class: "pointer link blue" },
-        logo: { class: "br-100 w3 h3", src: "assets/logo.png" },
         root: { class: "ma0 w-100 pa0 sans-serif" },
-        title: { class: "f1 fw4" },
+        link: { class: "pointer link blue" },
     }
 };

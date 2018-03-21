@@ -10,6 +10,7 @@
         "create-hdom-app": "./index.js"
     },
     "dependencies": {
+        "@thi.ng/api": "^2.1.0",
         "chalk": "^2.3.2",
         "commander": "^2.15.0",
         "fs-extra": "^5.0.0",

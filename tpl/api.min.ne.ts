@@ -1,6 +1,5 @@
 import { IObjectOf } from "@thi.ng/api/api";
 import { ViewTransform, IView } from "@thi.ng/atom/api";
-import { EventDef, EffectDef } from "@thi.ng/interceptors/api";
 import { HTMLRouterConfig, RouteMatch } from "@thi.ng/router/api";
 
 import { App } from "./app";
@@ -25,8 +24,6 @@ export type ViewSpec = string | [string, ViewTransform<any>];
 export interface AppConfig {
     components: IObjectOf<AppComponent>;
     domRoot: string | Element;
-    effects: IObjectOf<EffectDef>;
-    events: IObjectOf<EventDef>;
     initialState: any;
     router: HTMLRouterConfig;
     ui: UIAttribs;
@@ -34,7 +31,7 @@ export interface AppConfig {
 }
 
 /**
- * Base structure of derived views exposed by the base app.
+ * Base structure of known derived views exposed by the base app.
  * Add more declarations here as needed.
  */
 export interface AppViews extends IObjectOf<IView<any>> {
@@ -51,10 +48,6 @@ export interface AppViews extends IObjectOf<IView<any>> {
  */
 export interface UIAttribs {
     body: any;
-    code: any;
-    header: any;
     link: any;
-    logo: any;
     root: any;
-    title: any;
 }

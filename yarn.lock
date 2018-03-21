@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@thi.ng/api@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@thi.ng/api/-/api-2.1.0.tgz#7fe30c4bc70f3e3f83668c7b8e84269f293829d9"
+  dependencies:
+    "@thi.ng/checks" "^1.3.0"
+
+"@thi.ng/checks@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@thi.ng/checks/-/checks-1.3.0.tgz#8abd7bdbd1751b901b692e19caf5518eba77beb1"
+
 "@types/node@^9.4.7":
   version "9.4.7"
   resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"

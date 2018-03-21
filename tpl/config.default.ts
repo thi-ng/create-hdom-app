@@ -120,7 +120,7 @@ export const CONFIG: AppConfig = {
         counter: "counter",
     },
 
-    // component CSS class config using tachyons-css
+    // component CSS class config using http://tachyons.io/
     // these attribs are being passed to all/most components
     ui: {
         body: { class: "ma3" },
