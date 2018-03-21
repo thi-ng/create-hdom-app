@@ -4,14 +4,14 @@ import { main } from "./components/main";
 // best practice tip: define event & effect names as consts or enums
 // and avoid hardcoded strings for more safety and easier refactoring
 // also see pre-defined event handlers & interceptors in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/atom/src/api.ts#L19
+// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L14
 
 export const EV_FOO = "foo";
 
 // side effect IDs. these don't / shouldn't need to be exported. other
 // parts of the app should / can only use events...
 // also see pre-defined side effects in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/atom/src/api.ts#L22
+// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L19
 
 // const FX_FOO = "foo";
 
@@ -27,7 +27,7 @@ export const CONFIG: AppConfig = {
     // and only side effect functions execute any "real" work.
 
     // Docs here:
-    // https://github.com/thi-ng/umbrella/blob/master/packages/atom/src/event-bus.ts#L14
+    // https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/event-bus.ts#L14
     events: {
 
     },
