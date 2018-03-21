@@ -293,8 +293,8 @@ const opts: Command = new Command(packageJson.name)
     .option("-q, --quiet", "suppress all messages (excl. errors)")
     .option("--bare", "same as '--minimal --no-router --no-events'")
     .option("--minimal", "don't generate dummy components")
-    .option("--no-router", "skip router config")
-    .option("--no-events", "skip event config")
+    .option("--no-router", "skip router support")
+    .option("--no-events", "skip event bus support")
     .parse(process.argv);
 
 createApp(conf, opts);
