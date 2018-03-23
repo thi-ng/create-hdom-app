@@ -49,13 +49,14 @@ export class App {
     }
 
     /**
-     * Kicks off hdom render loop, including batched event processing
-     * and fast fail check if DOM updates are necessary (assumes ALL
-     * state is held in the app state atom. So if there weren't any
-     * events causing a state change since last frame, re-rendering is
-     * skipped without even attempting to diff DOM tree).
+     * Calls `init()` and kicks off hdom render loop, including batched
+     * event processing and fast fail check if DOM updates are necessary
+     * (assumes ALL state is held in the app state atom. So if there
+     * weren't any events causing a state change since last frame,
+     * re-rendering is skipped without even attempting to diff DOM tree).
      */
     start() {
+        this.init();
         let firstFrame = true;
         start(
             this.config.domRoot,
@@ -66,5 +67,13 @@ export class App {
                 }
             }
         );
+    }
+
+    /**
+     * User initialization hook.
+     * Automatically called from `start()`
+     */
+    init() {
+        // ...add init tasks here
     }
 }

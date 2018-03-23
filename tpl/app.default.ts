@@ -81,14 +81,14 @@ export class App {
     }
 
     /**
-     * Starts router and kicks off hdom render loop, including batched
+     * Calls `init()` and kicks off hdom render loop, including batched
      * event processing and fast fail check if DOM updates are necessary
      * (assumes ALL state is held in the app state atom. So if there
      * weren't any events causing a state change since last frame,
      * re-rendering is skipped without even attempting to diff DOM tree).
      */
     start() {
-        this.router.start();
+        this.init();
         start(this.config.domRoot, () => {
             if (this.bus.processQueue()) {
                 return this.rootComponent();
@@ -102,5 +102,14 @@ export class App {
      */
     rootComponent(): any {
         return this.views.routeComponent;
+    }
+
+    /**
+     * User initialization hook.
+     * Automatically called from `start()`
+     */
+    init() {
+        this.router.start();
+        // ...add more init tasks here
     }
 }

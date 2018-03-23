@@ -47,12 +47,21 @@ export class App {
     }
 
     /**
-     * Kicks off hdom render loop.
+     * Calls `init()` and kicks off hdom render loop.
      */
     start() {
+        this.init();
         start(
             this.config.domRoot,
             () => this.config.rootComponent(this, this.config.ui)
         );
+    }
+
+    /**
+     * User initialization hook.
+     * Automatically called from `start()`
+     */
+    init() {
+        // ...add init tasks here
     }
 }

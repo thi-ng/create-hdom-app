@@ -66,10 +66,10 @@ export class App {
     }
 
     /**
-     * Starts router and kicks off hdom render loop.
+     * Calls `init()` and kicks off hdom render loop.
      */
     start() {
-        this.router.start();
+        this.init()
         start(this.config.domRoot, () => this.rootComponent());
     }
 
@@ -79,5 +79,14 @@ export class App {
      */
     rootComponent(): any {
         return this.views.routeComponent;
+    }
+
+    /**
+     * User initialization hook.
+     * Automatically called from `start()`
+     */
+    init() {
+        this.router.start();
+        // ...add more init tasks here
     }
 }
