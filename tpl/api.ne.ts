@@ -27,14 +27,14 @@ export interface AppConfig {
     initialState: any;
     router: HTMLRouterConfig;
     ui: UIAttribs;
-    views: IObjectOf<ViewSpec>;
+    views: Partial<Record<keyof AppViews, ViewSpec>>;
 }
 
 /**
  * Base structure of known derived views exposed by the base app.
  * Add more declarations here as needed.
  */
-export interface AppViews extends IObjectOf<IView<any>> {
+export interface AppViews extends Record<keyof AppViews, IView<any>> {
     route: IView<RouteMatch>;
     routeComponent: IView<any>;
 }

@@ -23,14 +23,14 @@ export interface AppConfig {
     initialState: any;
     rootComponent: AppComponent;
     ui: UIAttribs;
-    views: IObjectOf<ViewSpec>;
+    views: Partial<Record<keyof AppViews, ViewSpec>>;
 }
 
 /**
  * Base structure of derived views exposed by the base app.
  * Add more declarations here as needed.
  */
-export interface AppViews extends IObjectOf<IView<any>> {
+export interface AppViews extends Record<keyof AppViews, IView<any>> {
 }
 
 /**
