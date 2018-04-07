@@ -121,7 +121,7 @@ const makePackage = (conf: ProjectConfig, opts) => {
             devDependencies: {
                 "@types/node": "^9.6.2",
                 "typescript": "^2.8.1",
-                "ts-loader": "^4.1.1",
+                "ts-loader": "^4.1.0",
                 "webpack": "^4.5.0",
                 "webpack-cli": "^2.0.14",
                 "webpack-dev-server": "^3.1.1",
