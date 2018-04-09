@@ -1,18 +1,9 @@
-import { Route } from "@thi.ng/router/api";
-
 import { AppConfig } from "./api";
+import * as routes from "./routes";
 
 // user defined components for different routes
 
 import { main } from "./components/main";
-
-// route definitions
-// docs: https://github.com/thi-ng/umbrella/blob/master/packages/router/README.md
-
-export const ROUTE_MAIN: Route = {
-    id: "main",
-    match: ["main"],
-};
 
 // main App configuration
 export const CONFIG: AppConfig = {
@@ -25,11 +16,11 @@ export const CONFIG: AppConfig = {
         // (if set to false, a web server is needed)
         useFragment: true,
         // route ID if no other matches (MUST be non-parametric!)
-        defaultRouteID: ROUTE_MAIN.id,
+        defaultRouteID: routes.MAIN.id,
         // IMPORTANT: rules with common prefixes MUST be specified in
         // descending order of highest precision / longest path
         routes: [
-            ROUTE_MAIN,
+            routes.MAIN,
         ]
     },
 
@@ -37,7 +28,7 @@ export const CONFIG: AppConfig = {
     // those functions are called automatically by the app's root component
     // based on the currently active route
     components: {
-        [ROUTE_MAIN.id]: main,
+        [routes.MAIN.id]: main,
     },
 
     // DOM root element (or ID)
@@ -51,6 +42,10 @@ export const CONFIG: AppConfig = {
     // derived view declarations
     // each key specifies the name of the view and each value is
     // a state path or `[path, transformer]` tuple
+
+    // note: the `route` and `routeComponent` views are created by
+    // the App (in app.ts) automatically
+
     // docs here:
     // https://github.com/thi-ng/umbrella/tree/master/packages/atom#derived-views
     views: {

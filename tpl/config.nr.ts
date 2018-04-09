@@ -2,30 +2,16 @@ import { FX_DISPATCH_NOW } from "@thi.ng/interceptors/api";
 import { forwardSideFx, trace, valueUpdater } from "@thi.ng/interceptors/interceptors";
 
 import { AppConfig } from "./api";
+import * as ev from "./events";
+import * as fx from "./effects";
+
 import { home } from "./components/home";
-
-// best practice tip: define event & effect names as consts or enums
-// and avoid hardcoded strings for more safety and easier refactoring
-// also see pre-defined event handlers & interceptors in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L14
-
-export const EV_ALERT = "alert";
-export const EV_COUNT = "count";
-export const EV_ERROR = "error";
-export const EV_SUCCESS = "success";
-
-// side effect IDs. these don't / shouldn't need to be exported. other
-// parts of the app should / can only use events...
-// also see pre-defined side effects in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L19
-
-const FX_ALERT = "alert";
 
 // main App configuration
 export const CONFIG: AppConfig = {
 
     // event handlers events are queued and batch processed in app's RAF
-    // renderloop event handlers can be single functions, interceptor
+    // render loop event handlers can be single functions, interceptor
     // objects with `pre`/`post` keys or arrays of either.
 
     // the event handlers' only task is to transform the event into a
@@ -35,18 +21,18 @@ export const CONFIG: AppConfig = {
     // Docs here:
     // https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/event-bus.ts#L14
     events: {
-        [EV_ALERT]: forwardSideFx(FX_ALERT),
+        [ev.ALERT]: forwardSideFx(fx.ALERT),
 
-        [EV_COUNT]: [
+        [ev.COUNT]: [
             trace,
             valueUpdater("counter", (x: number) => x + 1),
-            (state) => ({ [FX_DISPATCH_NOW]: [EV_ALERT, `clicked ${state.counter} times`] })
+            (state) => ({ [FX_DISPATCH_NOW]: [ev.ALERT, `clicked ${state.counter} times`] })
         ]
     },
 
     // custom side effects
     effects: {
-        [FX_ALERT]: (msg) => alert(msg),
+        [fx.ALERT]: (msg) => alert(msg),
     },
 
     // DOM root element (or ID)

@@ -1,5 +1,5 @@
 import { AppContext } from "../api";
-import { App } from "../app";
+import { ROUTE_TO } from "../events";
 
 /**
  * Customizable hyperlink component emitting EV_ROUTE_TO event when clicked.
@@ -16,7 +16,7 @@ export function routeLink(ctx: AppContext, attribs: any, routeID: PropertyKey, r
             ...attribs,
             onclick: (e) => {
                 e.preventDefault();
-                ctx.bus.dispatch([App.EV_ROUTE_TO, [routeID, routeParams]]);
+                ctx.bus.dispatch([ROUTE_TO, [routeID, routeParams]]);
             }
         },
         body];

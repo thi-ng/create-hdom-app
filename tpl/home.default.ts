@@ -1,5 +1,5 @@
 import { AppContext } from "../api";
-import { EV_ALERT, EV_COUNT } from "../config";
+import { ALERT, COUNT } from "../events";
 
 import { appState } from "./appstate";
 import { header } from "./header";
@@ -13,8 +13,8 @@ export function home(ctx: AppContext) {
         ["div", ui.body,
             ["ul",
                 ["li", [routeLink, ui.link, "test", { id: 1 }, "test route"]],
-                ["li", [eventLink, ui.link, [EV_ALERT, "it works"], "test alert"]],
-                ["li", [eventLink, ui.link, [EV_COUNT], "test counter"]],
+                ["li", [eventLink, ui.link, [ALERT, "it works"], "test alert"]],
+                ["li", [eventLink, ui.link, [COUNT], "test counter"]],
             ],
             appState,
         ]

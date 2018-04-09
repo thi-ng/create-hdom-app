@@ -1,25 +1,14 @@
 import { AppConfig } from "./api";
+// import * as ev from "./events";
+// import * as fx from "./effects";
+
 import { main } from "./components/main";
-
-// best practice tip: define event & effect names as consts or enums
-// and avoid hardcoded strings for more safety and easier refactoring
-// also see pre-defined event handlers & interceptors in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L14
-
-export const EV_FOO = "foo";
-
-// side effect IDs. these don't / shouldn't need to be exported. other
-// parts of the app should / can only use events...
-// also see pre-defined side effects in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L19
-
-// const FX_FOO = "foo";
 
 // main App configuration
 export const CONFIG: AppConfig = {
 
     // event handlers events are queued and batch processed in app's RAF
-    // renderloop event handlers can be single functions, interceptor
+    // render loop event handlers can be single functions, interceptor
     // objects with `pre`/`post` keys or arrays of either.
 
     // the event handlers' only task is to transform the event into a

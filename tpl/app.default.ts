@@ -8,6 +8,8 @@ import { EVENT_ROUTE_CHANGED } from "@thi.ng/router/api";
 import { HTMLRouter } from "@thi.ng/router/history";
 
 import { AppConfig, AppContext, AppViews, ViewSpec } from "./api";
+import * as ev from "./events";
+import * as fx from "./effects";
 
 /**
  * Generic base app skeleton. You can use this as basis for your own
@@ -23,9 +25,6 @@ import { AppConfig, AppContext, AppViews, ViewSpec } from "./api";
  * - start router, hdom render & event bus loop
  */
 export class App {
-
-    static readonly EV_ROUTE_TO = "route-to";
-    static readonly FX_ROUTE_TO = "route-to";
 
     config: AppConfig;
     ctx: AppContext;
@@ -48,10 +47,10 @@ export class App {
         );
         this.ctx.bus.addHandlers({
             [EVENT_ROUTE_CHANGED]: valueSetter("route"),
-            [App.EV_ROUTE_TO]: (_, [__, route]) => ({ [App.FX_ROUTE_TO]: route })
+            [ev.ROUTE_TO]: (_, [__, route]) => ({ [fx.ROUTE_TO]: route })
         });
         this.ctx.bus.addEffect(
-            App.FX_ROUTE_TO,
+            fx.ROUTE_TO,
             ([id, params]) => this.router.routeTo(this.router.format(id, params))
         );
         this.addViews({

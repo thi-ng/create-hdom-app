@@ -1,54 +1,16 @@
-import { Route } from "@thi.ng/router/api";
 import { FX_DISPATCH_NOW } from "@thi.ng/interceptors/api";
 import { forwardSideFx, trace, valueUpdater } from "@thi.ng/interceptors/interceptors";
 
 import { AppConfig } from "./api";
 
+import * as ev from "./events";
+import * as fx from "./effects";
+import * as routes from "./routes";
+
 // user defined components for different routes
 
 import { home } from "./components/home";
 import { testRoute } from "./components/testroute";
-
-// route definitions
-// docs: https://github.com/thi-ng/umbrella/blob/master/packages/router/README.md
-
-export const ROUTE_HOME: Route = {
-    id: "home",
-    match: ["home"],
-};
-
-// example of a parametric route w/ parameter coercion & validation.
-// if coercion or validation fails, the route will not be matched if
-// no other route matches, the configured default fallback route will
-// be used. see full router config further below
-
-export const ROUTE_TEST: Route = {
-    id: "test",
-    match: ["test", "?id"],
-    validate: {
-        id: {
-            coerce: (x) => parseInt(x),
-            check: (x) => x > 0 && x < 3
-        }
-    }
-};
-
-// best practice tip: define event & effect names as consts or enums
-// and avoid hardcoded strings for more safety and easier refactoring
-// also see pre-defined event handlers & interceptors in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L14
-
-export const EV_ALERT = "alert";
-export const EV_COUNT = "count";
-export const EV_ERROR = "error";
-export const EV_SUCCESS = "success";
-
-// side effect IDs. these don't / shouldn't need to be exported. other
-// parts of the app should / can only use events...
-// also see pre-defined side effects in @thi.ng/atom:
-// https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/api.ts#L19
-
-const FX_ALERT = "alert";
 
 // main App configuration
 export const CONFIG: AppConfig = {
@@ -61,17 +23,17 @@ export const CONFIG: AppConfig = {
         // (if set to false, a web server is needed)
         useFragment: true,
         // route ID if no other matches (MUST be non-parametric!)
-        defaultRouteID: ROUTE_HOME.id,
+        defaultRouteID: routes.HOME.id,
         // IMPORTANT: rules with common prefixes MUST be specified in
         // descending order of highest precision / longest path
         routes: [
-            ROUTE_HOME,
-            ROUTE_TEST,
+            routes.HOME,
+            routes.TEST,
         ]
     },
 
     // event handlers events are queued and batch processed in app's RAF
-    // renderloop event handlers can be single functions, interceptor
+    // render loop event handlers can be single functions, interceptor
     // objects with `pre`/`post` keys or arrays of either.
 
     // the event handlers' only task is to transform the event into a
@@ -81,26 +43,26 @@ export const CONFIG: AppConfig = {
     // Docs here:
     // https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/event-bus.ts#L14
     events: {
-        [EV_ALERT]: forwardSideFx(FX_ALERT),
+        [ev.ALERT]: forwardSideFx(fx.ALERT),
 
-        [EV_COUNT]: [
+        [ev.COUNT]: [
             trace,
             valueUpdater("counter", (x: number) => x + 1),
-            (state) => ({ [FX_DISPATCH_NOW]: [EV_ALERT, `clicked ${state.counter} times`] })
+            (state) => ({ [FX_DISPATCH_NOW]: [ev.ALERT, `clicked ${state.counter} times`] })
         ]
     },
 
     // custom side effects
     effects: {
-        [FX_ALERT]: (msg) => alert(msg),
+        [fx.ALERT]: (msg) => alert(msg),
     },
 
     // mapping route IDs to their respective UI component functions
     // those functions are called automatically by the app's root component
     // based on the currently active route
     components: {
-        [ROUTE_HOME.id]: home,
-        [ROUTE_TEST.id]: testRoute,
+        [routes.HOME.id]: home,
+        [routes.TEST.id]: testRoute,
     },
 
     // DOM root element (or ID)
@@ -114,6 +76,10 @@ export const CONFIG: AppConfig = {
     // derived view declarations
     // each key specifies the name of the view and each value is
     // a state path or `[path, transformer]` tuple
+
+    // note: the `route` and `routeComponent` views are created by
+    // the App (in app.ts) automatically
+
     // docs here:
     // https://github.com/thi-ng/umbrella/tree/master/packages/atom#derived-views
     views: {

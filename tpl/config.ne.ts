@@ -1,35 +1,10 @@
-import { Route } from "@thi.ng/router/api";
-
 import { AppConfig } from "./api";
+import * as routes from "./routes";
 
 // user defined components for different routes
 
 import { home } from "./components/home";
 import { testRoute } from "./components/testroute";
-
-// route definitions
-// docs: https://github.com/thi-ng/umbrella/blob/master/packages/router/README.md
-
-export const ROUTE_HOME: Route = {
-    id: "home",
-    match: ["home"],
-};
-
-// example of a parametric route w/ parameter coercion & validation.
-// if coercion or validation fails, the route will not be matched if
-// no other route matches, the configured default fallback route will
-// be used. see full router config further below
-
-export const ROUTE_TEST: Route = {
-    id: "test",
-    match: ["test", "?id"],
-    validate: {
-        id: {
-            coerce: (x) => parseInt(x),
-            check: (x) => x > 0 && x < 3
-        }
-    }
-};
 
 // main App configuration
 export const CONFIG: AppConfig = {
@@ -42,12 +17,12 @@ export const CONFIG: AppConfig = {
         // (if set to false, a web server is needed)
         useFragment: true,
         // route ID if no other matches (MUST be non-parametric!)
-        defaultRouteID: ROUTE_HOME.id,
+        defaultRouteID: routes.HOME.id,
         // IMPORTANT: rules with common prefixes MUST be specified in
         // descending order of highest precision / longest path
         routes: [
-            ROUTE_HOME,
-            ROUTE_TEST,
+            routes.HOME,
+            routes.TEST,
         ]
     },
 
@@ -55,8 +30,8 @@ export const CONFIG: AppConfig = {
     // those functions are called automatically by the app's root component
     // based on the currently active route
     components: {
-        [ROUTE_HOME.id]: home,
-        [ROUTE_TEST.id]: testRoute,
+        [routes.HOME.id]: home,
+        [routes.TEST.id]: testRoute,
     },
 
     // DOM root element (or ID)
@@ -70,6 +45,10 @@ export const CONFIG: AppConfig = {
     // derived view declarations
     // each key specifies the name of the view and each value is
     // a state path or `[path, transformer]` tuple
+
+    // note: the `route` and `routeComponent` views are created by
+    // the App (in app.ts) automatically
+
     // docs here:
     // https://github.com/thi-ng/umbrella/tree/master/packages/atom#derived-views
     views: {
