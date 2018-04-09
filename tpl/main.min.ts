@@ -1,6 +1,5 @@
-import { UIAttribs } from "../api";
-import { App } from "../app";
+import { AppContext } from "../api";
 
-export function main(_: App, ui: UIAttribs) {
-    return ["div", ui.root, ["h1", "Welcome to @thi.ng/hdom"]];
+export function main(ctx: AppContext) {
+    return ["div", ctx.ui.root, ["h1", "Welcome to @thi.ng/hdom"]];
 }

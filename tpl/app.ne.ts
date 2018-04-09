@@ -5,7 +5,7 @@ import { start } from "@thi.ng/hdom";
 import { EVENT_ROUTE_CHANGED } from "@thi.ng/router/api";
 import { HTMLRouter } from "@thi.ng/router/history";
 
-import { AppConfig, ViewSpec, AppViews } from "./api";
+import { AppConfig, AppContext, AppViews, ViewSpec } from "./api";
 
 /**
  * Generic base app skeleton. You can use this as basis for your own
@@ -23,19 +23,20 @@ import { AppConfig, ViewSpec, AppViews } from "./api";
 export class App {
 
     config: AppConfig;
-    state: Atom<any>;
-    views: AppViews;
-    router: HTMLRouter;
+    ctx: AppContext;
 
     constructor(config: AppConfig) {
         this.config = config;
-        this.state = new Atom(config.initialState || {});
-        this.views = <AppViews>{};
+        this.ctx = {
+            state: new Atom(config.initialState || {}),
+            router: new HTMLRouter(config.router),
+            views: <AppViews>{},
+            ui: config.ui,
+        };
         this.addViews(this.config.views);
-        this.router = new HTMLRouter(config.router);
-        this.router.addListener(
+        this.ctx.router.addListener(
             EVENT_ROUTE_CHANGED,
-            (e) => this.state.resetIn("route", e.value)
+            (e) => this.ctx.state.resetIn("route", e.value)
         );
         this.addViews({
             route: "route",
@@ -43,7 +44,7 @@ export class App {
                 "route.id",
                 (id) =>
                     (this.config.components[id] ||
-                        (() => ["div", `missing component for route: ${id}`]))(this, this.config.ui)
+                        (() => ["div", `missing component for route: ${id}`]))(this.ctx)
             ]
         });
     }
@@ -55,12 +56,13 @@ export class App {
      * @param specs
      */
     addViews(specs: IObjectOf<ViewSpec>) {
+        const { state, views } = this.ctx;
         for (let id in specs) {
             const spec = specs[id];
             if (isArray(spec)) {
-                this.views[id] = this.state.addView(spec[0], spec[1]);
+                views[id] = state.addView(spec[0], spec[1]);
             } else {
-                this.views[id] = this.state.addView(spec);
+                views[id] = state.addView(spec);
             }
         }
     }
@@ -70,15 +72,11 @@ export class App {
      */
     start() {
         this.init()
-        start(this.config.domRoot, () => this.rootComponent());
-    }
-
-    /**
-     * User provided root component function defined
-     * by current route and the derived view defined above.
-     */
-    rootComponent(): any {
-        return this.views.routeComponent;
+        start(
+            this.config.domRoot,
+            () => this.ctx.views.routeComponent,
+            this.ctx
+        );
     }
 
     /**
@@ -86,7 +84,7 @@ export class App {
      * Automatically called from `start()`
      */
     init() {
-        this.router.start();
+        this.ctx.router.start();
         // ...add more init tasks here
     }
 }

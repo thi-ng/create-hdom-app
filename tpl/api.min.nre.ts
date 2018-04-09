@@ -1,14 +1,9 @@
-import { IObjectOf } from "@thi.ng/api/api";
-import { ViewTransform, IView } from "@thi.ng/atom/api";
-
-import { App } from "./app";
-
-// general types defined for the base app
+import { IAtom, IView, ViewTransform } from "@thi.ng/atom/api";
 
 /**
  * Function signature for main app components.
  */
-export type AppComponent = (app: App, ui: UIAttribs) => any;
+export type AppComponent = (ctx: AppContext, ...args: any[]) => any;
 
 /**
  * Derived view configurations.
@@ -44,4 +39,13 @@ export interface UIAttribs {
     body: any;
     link: any;
     root: any;
+}
+
+/**
+ * Structure of the context object passed to all component functions
+ */
+export interface AppContext {
+    state: IAtom<any>;
+    views: AppViews;
+    ui: UIAttribs;
 }

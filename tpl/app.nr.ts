@@ -4,10 +4,11 @@ import { isArray } from "@thi.ng/checks/is-array";
 import { start } from "@thi.ng/hdom";
 import { EventBus } from "@thi.ng/interceptors/event-bus";
 
-import { AppConfig, ViewSpec, AppViews } from "./api";
+import { AppConfig, AppContext, AppViews, ViewSpec } from "./api";
 
 /**
- * Generic base app skeleton. You can use this as basis for your own apps.
+ * Generic base app skeleton. You can use this as basis for your own
+ * apps.
  *
  * As is the app does not much more than:
  *
@@ -19,16 +20,18 @@ import { AppConfig, ViewSpec, AppViews } from "./api";
 export class App {
 
     config: AppConfig;
+    ctx: AppContext;
     state: Atom<any>;
-    views: AppViews;
-    bus: EventBus;
 
     constructor(config: AppConfig) {
         this.config = config;
         this.state = new Atom(config.initialState || {});
-        this.views = <AppViews>{};
+        this.ctx = {
+            bus: new EventBus(this.state, config.events, config.effects),
+            views: <AppViews>{},
+            ui: config.ui,
+        };
         this.addViews(this.config.views);
-        this.bus = new EventBus(this.state, config.events, config.effects);
     }
 
     /**
@@ -38,12 +41,13 @@ export class App {
      * @param specs
      */
     addViews(specs: IObjectOf<ViewSpec>) {
+        const views = this.ctx.views;
         for (let id in specs) {
             const spec = specs[id];
             if (isArray(spec)) {
-                this.views[id] = this.state.addView(spec[0], spec[1]);
+                views[id] = this.state.addView(spec[0], spec[1]);
             } else {
-                this.views[id] = this.state.addView(spec);
+                views[id] = this.state.addView(spec);
             }
         }
     }
@@ -51,9 +55,10 @@ export class App {
     /**
      * Calls `init()` and kicks off hdom render loop, including batched
      * event processing and fast fail check if DOM updates are necessary
-     * (assumes ALL state is held in the app state atom. So if there
+     * (assumes ALL state is held in the app state atom). So if there
      * weren't any events causing a state change since last frame,
-     * re-rendering is skipped without even attempting to diff DOM tree).
+     * re-rendering is skipped without even attempting to diff DOM
+     * tree).
      */
     start() {
         this.init();
@@ -61,11 +66,12 @@ export class App {
         start(
             this.config.domRoot,
             () => {
-                if (this.bus.processQueue() || firstFrame) {
+                if (this.ctx.bus.processQueue() || firstFrame) {
                     firstFrame = false;
-                    return this.config.rootComponent(this, this.config.ui);
+                    return this.config.rootComponent(this.ctx);
                 }
-            }
+            },
+            this.ctx
         );
     }
 

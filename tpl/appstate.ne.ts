@@ -8,6 +8,6 @@ import { AppContext } from "../api";
  */
 export function appState(ctx: AppContext) {
     return ["p", "Current app state:",
-        ["pre", ctx.ui.code, () => JSON.stringify(ctx.bus.state.deref(), null, 2)]
+        ["pre", ctx.ui.code, () => JSON.stringify(ctx.state.deref(), null, 2)]
     ];
 }

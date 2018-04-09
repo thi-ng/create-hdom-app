@@ -1,4 +1,6 @@
-export function link(onclick: (e: Event) => void, attribs: any, body: any) {
+import { AppContext } from "../api";
+
+export function link(_: AppContext, attribs: any, onclick: (e: Event) => void, body: any) {
     return ["a",
         {
             ...attribs,

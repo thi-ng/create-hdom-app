@@ -1,17 +1,14 @@
 import { IObjectOf } from "@thi.ng/api/api";
 import { ViewTransform, IView } from "@thi.ng/atom/api";
 import { EventDef, EffectDef } from "@thi.ng/interceptors/api";
+import { EventBus } from "@thi.ng/interceptors/event-bus";
 import { HTMLRouterConfig, RouteMatch } from "@thi.ng/router/api";
-
-import { App } from "./app";
-
-// general types defined for the base app
 
 /**
  * Function signature for main app components.
  * I.e. components representing different app states linked to router.
  */
-export type AppComponent = (app: App, ui: UIAttribs) => any;
+export type AppComponent = (ctx: AppContext, ...args: any[]) => any;
 
 /**
  * Derived view configurations.
@@ -40,6 +37,7 @@ export interface AppConfig {
 export interface AppViews extends Record<keyof AppViews, IView<any>> {
     route: IView<RouteMatch>;
     routeComponent: IView<any>;
+    counter: IView<number>;
 }
 
 /**
@@ -57,4 +55,13 @@ export interface UIAttribs {
     logo: any;
     root: any;
     title: any;
+}
+
+/**
+ * Structure of the context object passed to all component functions
+ */
+export interface AppContext {
+    bus: EventBus;
+    views: AppViews;
+    ui: UIAttribs;
 }

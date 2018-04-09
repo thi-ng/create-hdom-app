@@ -1,7 +1,7 @@
-import { UIAttribs } from "../api";
+import { AppContext } from "../api";
 
-export function header(ui: UIAttribs, title: string) {
-    return ["header", ui.header,
-        ["img", ui.logo],
-        ["h1", ui.title, title]];
+export function header(ctx: AppContext, title: string) {
+    return ["header", ctx.ui.header,
+        ["img", ctx.ui.logo],
+        ["h1", ctx.ui.title, title]];
 }

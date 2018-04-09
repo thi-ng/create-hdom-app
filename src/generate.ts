@@ -22,12 +22,12 @@ const FILES: FileSpecs = {
             ["tsconfig.json", ["tsconfig.json"]],
             ["webpack.config.js", ["webpack.config.js"]],
             ["index.ts", ["src", "index.ts"]],
-            ["appstate.ts", ["src", "components", "appstate.ts"]],
             ["header.ts", ["src", "components", "header.ts"]],
         ],
         default: [
             ["api.default.ts", ["src", "api.ts"]],
             ["app.default.ts", ["src", "app.ts"]],
+            ["appstate.ts", ["src", "components", "appstate.ts"]],
             ["config.default.ts", ["src", "config.ts"]],
             ["home.default.ts", ["src", "components", "home.ts"]],
             ["testroute.ts", ["src", "components", "testroute.ts"]],
@@ -37,6 +37,7 @@ const FILES: FileSpecs = {
         ne: [
             ["api.ne.ts", ["src", "api.ts"]],
             ["app.ne.ts", ["src", "app.ts"]],
+            ["appstate.ne.ts", ["src", "components", "appstate.ts"]],
             ["config.ne.ts", ["src", "config.ts"]],
             ["home.ne.ts", ["src", "components", "home.ts"]],
             ["testroute.ts", ["src", "components", "testroute.ts"]],
@@ -46,6 +47,7 @@ const FILES: FileSpecs = {
         nr: [
             ["api.nr.ts", ["src", "api.ts"]],
             ["app.nr.ts", ["src", "app.ts"]],
+            ["appstate.ts", ["src", "components", "appstate.ts"]],
             ["config.nr.ts", ["src", "config.ts"]],
             ["home.nr.ts", ["src", "components", "home.ts"]],
             ["event-link.ts", ["src", "components", "event-link.ts"]],
@@ -53,6 +55,7 @@ const FILES: FileSpecs = {
         nre: [
             ["api.nre.ts", ["src", "api.ts"]],
             ["app.nre.ts", ["src", "app.ts"]],
+            ["appstate.ne.ts", ["src", "components", "appstate.ts"]],
             ["config.nre.ts", ["src", "config.ts"]],
             ["home.nre.ts", ["src", "components", "home.ts"]],
             ["link.ts", ["src", "components", "link.ts"]],

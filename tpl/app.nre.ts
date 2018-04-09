@@ -3,7 +3,7 @@ import { Atom } from "@thi.ng/atom/atom";
 import { isArray } from "@thi.ng/checks/is-array";
 import { start } from "@thi.ng/hdom";
 
-import { AppConfig, ViewSpec, AppViews } from "./api";
+import { AppConfig, AppContext, AppViews, ViewSpec } from "./api";
 
 /**
  * Generic base app skeleton. You can use this as basis for your own
@@ -19,13 +19,15 @@ import { AppConfig, ViewSpec, AppViews } from "./api";
 export class App {
 
     config: AppConfig;
-    state: Atom<any>;
-    views: AppViews;
+    ctx: AppContext;
 
     constructor(config: AppConfig) {
         this.config = config;
-        this.state = new Atom(config.initialState || {});
-        this.views = <AppViews>{};
+        this.ctx = {
+            state: new Atom(config.initialState || {}),
+            views: <AppViews>{},
+            ui: config.ui,
+        };
         this.addViews(this.config.views);
     }
 
@@ -36,12 +38,13 @@ export class App {
      * @param specs
      */
     addViews(specs: IObjectOf<ViewSpec>) {
+        const { state, views } = this.ctx;
         for (let id in specs) {
             const spec = specs[id];
             if (isArray(spec)) {
-                this.views[id] = this.state.addView(spec[0], spec[1]);
+                views[id] = state.addView(spec[0], spec[1]);
             } else {
-                this.views[id] = this.state.addView(spec);
+                views[id] = state.addView(spec);
             }
         }
     }
@@ -53,7 +56,8 @@ export class App {
         this.init();
         start(
             this.config.domRoot,
-            () => this.config.rootComponent(this, this.config.ui)
+            () => this.config.rootComponent(this.ctx),
+            this.ctx
         );
     }
 
