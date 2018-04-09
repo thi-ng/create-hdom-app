@@ -3,7 +3,7 @@ import { Atom } from "@thi.ng/atom/atom";
 import { isArray } from "@thi.ng/checks/is-array";
 import { start } from "@thi.ng/hdom";
 import { EventBus } from "@thi.ng/interceptors/event-bus";
-import { valueSetter } from "@thi.ng/interceptors/interceptors";
+import { forwardSideFx, valueSetter } from "@thi.ng/interceptors/interceptors";
 import { EVENT_ROUTE_CHANGED } from "@thi.ng/router/api";
 import { HTMLRouter } from "@thi.ng/router/history";
 
@@ -47,7 +47,7 @@ export class App {
         );
         this.ctx.bus.addHandlers({
             [EVENT_ROUTE_CHANGED]: valueSetter("route"),
-            [ev.ROUTE_TO]: (_, [__, route]) => ({ [fx.ROUTE_TO]: route })
+            [ev.ROUTE_TO]: forwardSideFx(fx.ROUTE_TO),
         });
         this.ctx.bus.addEffect(
             fx.ROUTE_TO,
