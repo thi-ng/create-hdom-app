@@ -1,7 +1,5 @@
 import { AppConfig } from "./api";
-// import * as ev from "./events";
-// import * as fx from "./effects";
-
+import { EVENTS, EFFECTS } from "./handlers";
 import { main } from "./components/main";
 
 // main App configuration
@@ -17,14 +15,10 @@ export const CONFIG: AppConfig = {
 
     // Docs here:
     // https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/event-bus.ts#L14
-    events: {
-
-    },
+    events: EVENTS,
 
     // custom side effects
-    effects: {
-
-    },
+    effects: EFFECTS,
 
     // DOM root element (or ID)
     domRoot: "app",

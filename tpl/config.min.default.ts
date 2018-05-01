@@ -1,6 +1,5 @@
 import { AppConfig } from "./api";
-// import * as ev from "./events";
-// import * as fx from "./effects";
+import { EVENTS, EFFECTS } from "./handlers";
 import * as routes from "./routes";
 
 // user defined components for different routes
@@ -36,14 +35,10 @@ export const CONFIG: AppConfig = {
 
     // Docs here:
     // https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/event-bus.ts#L14
-    events: {
-
-    },
+    events: EVENTS,
 
     // custom side effects
-    effects: {
-
-    },
+    effects: EFFECTS,
 
     // mapping route IDs to their respective UI component functions
     // those functions are called automatically by the app's root component
