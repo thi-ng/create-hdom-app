@@ -27,19 +27,10 @@ export const CONFIG: AppConfig = {
         ]
     },
 
-    // event handlers events are queued and batch processed in app's RAF
-    // render loop event handlers can be single functions, interceptor
-    // objects with `pre`/`post` keys or arrays of either.
-
-    // the event handlers' only task is to transform the event into a
-    // number of side effects. event handlers should be pure functions
-    // and only side effect functions execute any "real" work.
-
-    // Docs here:
-    // https://github.com/thi-ng/umbrella/blob/master/packages/interceptors/src/event-bus.ts#L14
+    // event handlers (defined in handlers.ts)
     events: EVENTS,
 
-    // custom side effects
+    // side effects (defined in handlers.ts)
     effects: EFFECTS,
 
     // mapping route IDs to their respective UI component functions
