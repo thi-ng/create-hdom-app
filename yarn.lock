@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@thi.ng/api@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@thi.ng/api/-/api-2.1.0.tgz#7fe30c4bc70f3e3f83668c7b8e84269f293829d9"
+"@thi.ng/api@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@thi.ng/api/-/api-4.1.0.tgz#c677f5f0cec615798ade16fff6e03128ed335221"
   dependencies:
-    "@thi.ng/checks" "^1.3.0"
+    "@thi.ng/errors" "^0.1.6"
 
-"@thi.ng/checks@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@thi.ng/checks/-/checks-1.3.0.tgz#8abd7bdbd1751b901b692e19caf5518eba77beb1"
+"@thi.ng/errors@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@thi.ng/errors/-/errors-0.1.6.tgz#adf5166f19694aa1ccbb1f4f444491273c71d370"
 
-"@types/node@^9.4.7":
-  version "9.4.7"
-  resolved "http://registry.npmjs.org/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
+"@types/node@^10.9.4":
+  version "10.9.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.4.tgz#0f4cb2dc7c1de6096055357f70179043c33e9897"
 
 ansi-styles@^3.2.1:
   version "3.2.1"
@@ -26,9 +26,9 @@ builtins@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
 
-chalk@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.2.tgz#250dc96b07491bfd601e648d66ddf5f60c7a5c65"
+chalk@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
   dependencies:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
@@ -44,17 +44,17 @@ color-name@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-commander@^2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
+commander@^2.17.1:
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-fs-extra@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
+fs-extra@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.0.tgz#8cc3f47ce07ef7b3593a11b9fb245f7e34c041d6"
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
@@ -80,9 +80,9 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-typescript@^2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
+typescript@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.3.tgz#4853b3e275ecdaa27f78fda46dc273a7eb7fc1c8"
 
 universalify@^0.1.0:
   version "0.1.1"
