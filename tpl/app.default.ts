@@ -93,13 +93,12 @@ export class App {
     start() {
         this.init();
         start(
-            this.config.domRoot,
             () => {
                 if (this.ctx.bus.processQueue()) {
                     return this.ctx.views.routeComponent;
                 }
             },
-            this.ctx
+            { root: this.config.domRoot, ctx: this.ctx }
         );
     }
 

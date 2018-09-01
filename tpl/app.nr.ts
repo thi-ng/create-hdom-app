@@ -64,14 +64,13 @@ export class App {
         this.init();
         let firstFrame = true;
         start(
-            this.config.domRoot,
             () => {
                 if (this.ctx.bus.processQueue() || firstFrame) {
                     firstFrame = false;
                     return this.config.rootComponent(this.ctx);
                 }
             },
-            this.ctx
+            { root: this.config.domRoot, ctx: this.ctx }
         );
     }
 

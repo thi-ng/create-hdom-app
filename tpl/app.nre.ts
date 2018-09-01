@@ -55,9 +55,8 @@ export class App {
     start() {
         this.init();
         start(
-            this.config.domRoot,
             () => this.config.rootComponent(this.ctx),
-            this.ctx
+            { root: this.config.domRoot, ctx: this.ctx }
         );
     }
 
