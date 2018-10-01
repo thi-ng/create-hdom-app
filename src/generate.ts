@@ -140,12 +140,12 @@ const makePackage = (conf: ProjectConfig, opts) => {
             },
             dependencies: deps,
             devDependencies: {
-                "@types/node": "^9.6.2",
-                "typescript": "^2.8.3",
-                "ts-loader": "^4.2.0",
-                "webpack": "^4.6.0",
-                "webpack-cli": "^2.1.2",
-                "webpack-dev-server": "^3.1.3",
+                "@types/node": "^10.11.3",
+                "typescript": "^3.1.1",
+                "ts-loader": "^5.2.1",
+                "webpack": "^4.20.2",
+                "webpack-cli": "^3.1.2",
+                "webpack-dev-server": "^3.1.9"
             }
         },
         null, 4
